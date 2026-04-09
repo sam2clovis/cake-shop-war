@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweet Slice Bakery</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #fff7fb; color: #333; }
+    header { background: #e75480; color: white; padding: 30px; text-align: center; }
+    nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
+    .hero { padding: 50px 20px; text-align: center; background: #ffe4ec; }
+    .hero h1 { margin-bottom: 10px; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 20px; padding: 40px; }
+    .card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.1); padding: 20px; text-align: center; }
+    .card h3 { margin-top: 0; }
+    .btn { display: inline-block; margin-top: 10px; padding: 10px 16px; background: #e75480; color: white; text-decoration: none; border-radius: 8px; }
+    footer { text-align: center; padding: 20px; background: #f8d7e1; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sweet Slice Bakery</h1>
+    <nav>
+      <a href="#cakes">Cakes</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Order Beautiful Cakes Online</h1>
+    <p>Fresh cakes for birthdays, weddings, and special celebrations.</p>
+    <a class="btn" href="#cakes">Shop Now</a>
+  </section>
+
+  <section id="cakes" class="products">
+    <div class="card">
+      <h3>Chocolate Dream</h3>
+      <p>$38</p>
+      <a class="btn" href="#">Add to Cart</a>
+    </div>
+    <div class="card">
+      <h3>Strawberry Bliss</h3>
+      <p>$42</p>
+      <a class="btn" href="#">Add to Cart</a>
+    </div>
+    <div class="card">
+      <h3>Red Velvet Deluxe</h3>
+      <p>$48</p>
+      <a class="btn" href="#">Add to Cart</a>
+    </div>
+    <div class="card">
+      <h3>Caramel Celebration</h3>
+      <p>$45</p>
+      <a class="btn" href="#">Add to Cart</a>
+    </div>
+  </section>
+
+  <section id="about" class="hero">
+    <h2>About Us</h2>
+    <p>We create elegant cakes with fresh ingredients and beautiful designs.</p>
+  </section>
+
+  <footer id="contact">
+    <p>Sweet Slice Bakery © 2026</p>
+  </footer>
+</body>
+</html>
