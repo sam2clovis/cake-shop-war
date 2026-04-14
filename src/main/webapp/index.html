@@ -69,6 +69,22 @@
       padding-bottom: 8px;
       border-bottom: 1px solid #f2f2f2;
     }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .cart-remove {
+      background: #ff6b6b;
+      margin: 0;
+      padding: 6px 10px;
+      font-size: 0.9rem;
+    }
+    .checkout-summary button.cancel {
+      background: #777;
+      margin-top: 16px;
+    }
     .total {
       font-size: 1.3rem;
       font-weight: bold;
@@ -135,7 +151,7 @@
           <li>No items added yet.</li>
         </ul>
         <p class="total">Total: $<span id="orderTotal">0.00</span></p>
-        <button class="btn" type="button" onclick="clearCart()">Cancel Entire Purchase</button>
+        <button class="btn cancel" type="button" onclick="clearCart()">Cancel Entire Purchase</button>
       </div>
       <div class="checkout-form">
         <h3>Enter payment details</h3>
@@ -195,18 +211,21 @@
       cart.forEach((item, index) => {
         total += item.price * item.quantity;
         const li = document.createElement('li');
-        li.textContent = `${item.quantity} × ${item.name} — $${(item.price * item.quantity).toFixed(2)}`;
+        const itemRow = document.createElement('div');
+        itemRow.className = 'cart-item';
+
+        const itemLabel = document.createElement('span');
+        itemLabel.textContent = `${item.quantity} × ${item.name} — $${(item.price * item.quantity).toFixed(2)}`;
 
         const removeButton = document.createElement('button');
-        removeButton.className = 'btn';
-        removeButton.style.marginLeft = '12px';
-        removeButton.style.padding = '6px 10px';
-        removeButton.style.fontSize = '0.9rem';
-        removeButton.textContent = 'Remove';
+        removeButton.className = 'btn cart-remove';
         removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
         removeButton.onclick = () => removeFromCart(index);
-        li.appendChild(removeButton);
 
+        itemRow.appendChild(itemLabel);
+        itemRow.appendChild(removeButton);
+        li.appendChild(itemRow);
         cartItems.appendChild(li);
       });
 
@@ -214,13 +233,16 @@
     }
 
     function removeFromCart(index) {
-      if (cart[index]) {
+      if (!cart[index]) return;
+      cart[index].quantity -= 1;
+      if (cart[index].quantity <= 0) {
         cart.splice(index, 1);
-        renderCart();
       }
+      renderCart();
     }
 
     function clearCart() {
+      if (cart.length === 0) return;
       cart.length = 0;
       renderCart();
     }
