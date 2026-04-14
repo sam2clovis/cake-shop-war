@@ -135,6 +135,7 @@
           <li>No items added yet.</li>
         </ul>
         <p class="total">Total: $<span id="orderTotal">0.00</span></p>
+        <button class="btn" type="button" onclick="clearCart()">Cancel Entire Purchase</button>
       </div>
       <div class="checkout-form">
         <h3>Enter payment details</h3>
@@ -191,14 +192,37 @@
       }
 
       let total = 0;
-      cart.forEach(item => {
+      cart.forEach((item, index) => {
         total += item.price * item.quantity;
         const li = document.createElement('li');
         li.textContent = `${item.quantity} × ${item.name} — $${(item.price * item.quantity).toFixed(2)}`;
+
+        const removeButton = document.createElement('button');
+        removeButton.className = 'btn';
+        removeButton.style.marginLeft = '12px';
+        removeButton.style.padding = '6px 10px';
+        removeButton.style.fontSize = '0.9rem';
+        removeButton.textContent = 'Remove';
+        removeButton.type = 'button';
+        removeButton.onclick = () => removeFromCart(index);
+        li.appendChild(removeButton);
+
         cartItems.appendChild(li);
       });
 
       orderTotal.textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      if (cart[index]) {
+        cart.splice(index, 1);
+        renderCart();
+      }
+    }
+
+    function clearCart() {
+      cart.length = 0;
+      renderCart();
     }
 
     function payBill() {
