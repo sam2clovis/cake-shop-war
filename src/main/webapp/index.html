@@ -10,10 +10,70 @@
     nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
     .hero { padding: 50px 20px; text-align: center; background: #ffe4ec; }
     .hero h1 { margin-bottom: 10px; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 20px; padding: 40px; }
-    .card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.1); padding: 20px; text-align: center; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.1);
+      padding: 20px;
+      text-align: center;
+    }
     .card h3 { margin-top: 0; }
-    .btn { display: inline-block; margin-top: 10px; padding: 10px 16px; background: #e75480; color: white; text-decoration: none; border-radius: 8px; }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background: #e75480;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .checkout-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: left;
+    }
+    .checkout-summary,
+    .checkout-form {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+    .checkout-form input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 18px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    .checkout-summary ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+    }
+    .checkout-summary li {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f2f2f2;
+    }
+    .total {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
     footer { text-align: center; padding: 20px; background: #f8d7e1; }
   </style>
 </head>
@@ -37,22 +97,53 @@
     <div class="card">
       <h3>Chocolate Dream</h3>
       <p>$38</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(0)">Add to Cart</button>
     </div>
     <div class="card">
       <h3>Strawberry Bliss</h3>
       <p>$42</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(1)">Add to Cart</button>
     </div>
     <div class="card">
       <h3>Red Velvet Deluxe</h3>
       <p>$48</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(2)">Add to Cart</button>
     </div>
     <div class="card">
       <h3>Caramel Celebration</h3>
       <p>$45</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(3)">Add to Cart</button>
+    </div>
+    <div class="card">
+      <h3>Lemon Silk</h3>
+      <p>$36</p>
+      <button class="btn" type="button" onclick="addToCart(4)">Add to Cart</button>
+    </div>
+    <div class="card">
+      <h3>Classic Vanilla</h3>
+      <p>$34</p>
+      <button class="btn" type="button" onclick="addToCart(5)">Add to Cart</button>
+    </div>
+  </section>
+
+  <section id="checkout" class="hero">
+    <h2>Checkout</h2>
+    <div class="checkout-box">
+      <div class="checkout-summary">
+        <h3>Your order</h3>
+        <ul id="cartItems">
+          <li>No items added yet.</li>
+        </ul>
+        <p class="total">Total: $<span id="orderTotal">0.00</span></p>
+      </div>
+      <div class="checkout-form">
+        <h3>Enter payment details</h3>
+        <label for="email">Email address</label>
+        <input id="email" type="email" placeholder="you@example.com" />
+        <label for="phone">Phone number</label>
+        <input id="phone" type="tel" placeholder="123-456-7890" />
+        <button class="btn" type="button" onclick="payBill()">Pay Bill</button>
+      </div>
     </div>
   </section>
 
@@ -64,5 +155,70 @@
   <footer id="contact">
     <p>Sweet Slice Bakery © 2026</p>
   </footer>
+
+  <script>
+    const cakes = [
+      { name: 'Chocolate Dream', price: 38 },
+      { name: 'Strawberry Bliss', price: 42 },
+      { name: 'Red Velvet Deluxe', price: 48 },
+      { name: 'Caramel Celebration', price: 45 },
+      { name: 'Lemon Silk', price: 36 },
+      { name: 'Classic Vanilla', price: 34 }
+    ];
+
+    const cart = [];
+
+    function addToCart(index) {
+      const cake = cakes[index];
+      const existing = cart.find(item => item.name === cake.name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ name: cake.name, price: cake.price, quantity: 1 });
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cartItems');
+      const orderTotal = document.getElementById('orderTotal');
+      cartItems.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<li>No items added yet.</li>';
+        orderTotal.textContent = '0.00';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        const li = document.createElement('li');
+        li.textContent = `${item.quantity} × ${item.name} — $${(item.price * item.quantity).toFixed(2)}`;
+        cartItems.appendChild(li);
+      });
+
+      orderTotal.textContent = total.toFixed(2);
+    }
+
+    function payBill() {
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const total = document.getElementById('orderTotal').textContent;
+
+      if (cart.length === 0) {
+        alert('Please add at least one cake to your cart before checking out.');
+        return;
+      }
+      if (!email || !phone) {
+        alert('Please enter both your email address and phone number to complete payment.');
+        return;
+      }
+
+      alert(`Payment complete!\n\nTotal amount: $${total}\nEmail: ${email}\nPhone: ${phone}`);
+    }
+
+    renderCart();
+  </script>
 </body>
 </html>
