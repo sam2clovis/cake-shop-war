@@ -5,16 +5,137 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sweet Slice Bakery</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #fff7fb; color: #333; }
-    header { background: #e75480; color: white; padding: 30px; text-align: center; }
-    nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
-    .hero { padding: 50px 20px; text-align: center; background: #ffe4ec; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #ffeef7 0%, #fff5f9 100%);
+      color: #4f2b42;
+    }
+    header {
+      background: #d45b8c;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(212, 91, 140, 0.18);
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    .hero {
+      padding: 50px 20px;
+      text-align: center;
+      background: #fde2ed;
+    }
     .hero h1 { margin-bottom: 10px; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 20px; padding: 40px; }
-    .card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.1); padding: 20px; text-align: center; }
+    .hero p { max-width: 640px; margin: 0 auto 24px; line-height: 1.7; }
+    .hero-image {
+      max-width: 360px;
+      width: 100%;
+      margin: 0 auto 28px;
+      border-radius: 28px;
+      display: block;
+      box-shadow: 0 14px 28px rgba(212, 91, 140, 0.16);
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap: 24px;
+      padding: 40px;
+    }
+    .card {
+      background: #fff0f7;
+      border-radius: 18px;
+      box-shadow: 0 2px 18px rgba(79, 43, 66, 0.08);
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #f6d5e5;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      margin-bottom: 18px;
+    }
     .card h3 { margin-top: 0; }
-    .btn { display: inline-block; margin-top: 10px; padding: 10px 16px; background: #e75480; color: white; text-decoration: none; border-radius: 8px; }
-    footer { text-align: center; padding: 20px; background: #f8d7e1; }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 18px;
+      background: #c74d88;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: #b7487f;
+    }
+    .checkout-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: left;
+    }
+    .checkout-summary,
+    .checkout-form {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 2px 14px rgba(79, 43, 66, 0.08);
+    }
+    .checkout-form input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 18px;
+      border: 1px solid #e6c8dc;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+    .checkout-summary ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+    }
+    .checkout-summary li {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f7dfe8;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .cart-remove {
+      background: #d86aa5;
+      margin: 0;
+      padding: 6px 10px;
+      font-size: 0.9rem;
+    }
+    .checkout-summary button.cancel {
+      background: #9f4a74;
+      margin-top: 16px;
+    }
+    .total {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f9dee7;
+    }
   </style>
 </head>
 <body>
@@ -29,30 +150,69 @@
 
   <section class="hero">
     <h1>Order Beautiful Cakes Online</h1>
-    <p>Fresh cakes for birthdays, weddings, and special celebrations.</p>
+    <p>Fresh cakes for birthdays, weddings, and special celebrations with elegant rose tones and delicious flavors.</p>
+    <img class="hero-image" src="images/hero-rose-cake.svg" alt="Rose cake with floral decorations" />
     <a class="btn" href="#cakes">Shop Now</a>
   </section>
 
   <section id="cakes" class="products">
     <div class="card">
+      <img src="images/chocolate-dream.svg" alt="Chocolate Dream cake" />
       <h3>Chocolate Dream</h3>
       <p>$38</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(0)">Add to Cart</button>
     </div>
     <div class="card">
+      <img src="images/strawberry-bliss.svg" alt="Strawberry Bliss cake" />
       <h3>Strawberry Bliss</h3>
       <p>$42</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(1)">Add to Cart</button>
     </div>
     <div class="card">
+      <img src="images/red-velvet-deluxe.svg" alt="Red Velvet Deluxe cake" />
       <h3>Red Velvet Deluxe</h3>
       <p>$48</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(2)">Add to Cart</button>
     </div>
     <div class="card">
+      <img src="images/caramel-celebration.svg" alt="Caramel Celebration cake" />
       <h3>Caramel Celebration</h3>
       <p>$45</p>
-      <a class="btn" href="#">Add to Cart</a>
+      <button class="btn" type="button" onclick="addToCart(3)">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="images/lemon-silk.svg" alt="Lemon Silk cake" />
+      <h3>Lemon Silk</h3>
+      <p>$36</p>
+      <button class="btn" type="button" onclick="addToCart(4)">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="images/classic-vanilla.svg" alt="Classic Vanilla cake" />
+      <h3>Classic Vanilla</h3>
+      <p>$34</p>
+      <button class="btn" type="button" onclick="addToCart(5)">Add to Cart</button>
+    </div>
+  </section>
+
+  <section id="checkout" class="hero">
+    <h2>Checkout</h2>
+    <div class="checkout-box">
+      <div class="checkout-summary">
+        <h3>Your order</h3>
+        <ul id="cartItems">
+          <li>No items added yet.</li>
+        </ul>
+        <p class="total">Total: $<span id="orderTotal">0.00</span></p>
+        <button class="btn cancel" type="button" onclick="clearCart()">Cancel Entire Purchase</button>
+      </div>
+      <div class="checkout-form">
+        <h3>Enter payment details</h3>
+        <label for="email">Email address</label>
+        <input id="email" type="email" placeholder="you@example.com" />
+        <label for="phone">Phone number</label>
+        <input id="phone" type="tel" placeholder="123-456-7890" />
+        <button class="btn" type="button" onclick="payBill()">Pay Bill</button>
+      </div>
     </div>
   </section>
 
@@ -64,5 +224,99 @@
   <footer id="contact">
     <p>Sweet Slice Bakery © 2026</p>
   </footer>
+
+  <script>
+    const cakes = [
+      { name: 'Chocolate Dream', price: 38 },
+      { name: 'Strawberry Bliss', price: 42 },
+      { name: 'Red Velvet Deluxe', price: 48 },
+      { name: 'Caramel Celebration', price: 45 },
+      { name: 'Lemon Silk', price: 36 },
+      { name: 'Classic Vanilla', price: 34 }
+    ];
+
+    const cart = [];
+
+    function addToCart(index) {
+      const cake = cakes[index];
+      const existing = cart.find(item => item.name === cake.name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ name: cake.name, price: cake.price, quantity: 1 });
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cartItems');
+      const orderTotal = document.getElementById('orderTotal');
+      cartItems.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<li>No items added yet.</li>';
+        orderTotal.textContent = '0.00';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const li = document.createElement('li');
+        const itemRow = document.createElement('div');
+        itemRow.className = 'cart-item';
+
+        const itemLabel = document.createElement('span');
+        itemLabel.textContent = `${item.quantity} × ${item.name} — $${(item.price * item.quantity).toFixed(2)}`;
+
+        const removeButton = document.createElement('button');
+        removeButton.className = 'btn cart-remove';
+        removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = () => removeFromCart(index);
+
+        itemRow.appendChild(itemLabel);
+        itemRow.appendChild(removeButton);
+        li.appendChild(itemRow);
+        cartItems.appendChild(li);
+      });
+
+      orderTotal.textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      if (!cart[index]) return;
+      cart[index].quantity -= 1;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      renderCart();
+    }
+
+    function clearCart() {
+      if (cart.length === 0) return;
+      cart.length = 0;
+      renderCart();
+    }
+
+    function payBill() {
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const total = document.getElementById('orderTotal').textContent;
+
+      if (cart.length === 0) {
+        alert('Please add at least one cake to your cart before checking out.');
+        return;
+      }
+      if (!email || !phone) {
+        alert('Please enter both your email address and phone number to complete payment.');
+        return;
+      }
+
+      alert(`Payment complete!\n\nTotal amount: $${total}\nEmail: ${email}\nPhone: ${phone}`);
+    }
+
+    renderCart();
+  </script>
 </body>
 </html>

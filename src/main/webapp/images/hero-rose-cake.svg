@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <defs>
+    <linearGradient id="heroBg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffe6f0"/>
+      <stop offset="100%" stop-color="#fdd8e8"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="400" fill="url(#heroBg)" rx="24"/>
+  <ellipse cx="250" cy="362" rx="180" ry="30" fill="#f7bfd7" opacity="0.75"/>
+  <path d="M100 280h300c15 0 20 12 20 27v33H80v-33c0-15 5-27 20-27Z" fill="#fff4fb"/>
+  <path d="M120 280c10-38 40-78 90-80 45-2 80 28 95 55 35 1 70 6 95 25v25H120Z" fill="#f9d4e8"/>
+  <path d="M145 225c18-14 40-22 64-22s46 8 64 22v6H145v-6Z" fill="#f7b0d3"/>
+  <ellipse cx="255" cy="235" rx="26" ry="12" fill="#f49bc0"/>
+  <ellipse cx="190" cy="218" rx="18" ry="10" fill="#f68ebc"/>
+  <ellipse cx="315" cy="208" rx="18" ry="10" fill="#f68ebc"/>
+  <path d="M175 205c12-14 32-20 52-18s38 14 50 26" stroke="#d8698f" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M128 280h244v16H128z" fill="#f3bbc8"/>
+  <path d="M140 306h220v10H140z" fill="#e5a4be"/>
+</svg>
